@@ -10,11 +10,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
-use Spatie\LaravelData\withData;
 
 class Role extends Model
 {
-    use Filterable,HasFactory , Notifiable , Sortable , withData;
+    use Filterable,HasFactory , Notifiable , Sortable;
 
     protected $fillable = [
         'name',
@@ -30,6 +29,11 @@ class Role extends Model
         return [
             'name' => 'string',
         ];
+    }
+
+    public function getData()
+    {
+        return $this->toArray();
     }
 
     /*
