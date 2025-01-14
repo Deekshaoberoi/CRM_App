@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Abbasudo\Purity\Traits\Filterable;
+use Abbasudo\Purity\Traits\Sortable;
 use Database\Factories\OpportunityFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
-use Abbasudo\Purity\Traits\Filterable;
-use Abbasudo\Purity\Traits\Sortable;
-use Abbasudo\Purity\Traits\withData;
+use Spatie\LaravelData\withData;
 
 class Opportunity extends Model
 {
-    use HasFactory ,Filterable , Sortable , Notifiable , withData;
+    use Filterable ,HasFactory , Notifiable , Sortable , withData;
 
     protected $table = 'opportunities';
 

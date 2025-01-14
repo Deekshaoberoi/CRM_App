@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Abbasudo\Purity\Traits\Filterable;
 use Abbasudo\Purity\Traits\Sortable;
-use Abbasudo\Purity\Traits\withData;
+use Spatie\LaravelData\withData;
 use Database\Factories\NoteFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

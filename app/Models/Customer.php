@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Abbasudo\Purity\Traits\withData;
 use Database\Factories\CustomerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Spatie\LaravelData\withData;
 
 class Customer extends Model
 {
