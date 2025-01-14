@@ -4,21 +4,20 @@ namespace App\Models;
 
 use Abbasudo\Purity\Traits\Filterable;
 use Abbasudo\Purity\Traits\Sortable;
-use Database\Factories\UserFactory;
+use Database\Factories\RoleFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 use Spatie\LaravelData\withData;
 
-class User extends Model
+class Role extends Model
 {
     use Filterable,HasFactory , Notifiable , Sortable , withData;
 
     protected $fillable = [
         'name',
-        'email',
-        'password',
-        'phone',
     ];
 
     protected $hidden = [
@@ -30,23 +29,20 @@ class User extends Model
     {
         return [
             'name' => 'string',
-            'email' => 'string',
-            'password' => 'string',
-            'phone' => 'string',
         ];
     }
+
     /*
     |--------------------------------------------------------------------------
     | Relatons
     |--------------------------------------------------------------------------
     */
-    public function roles(): BelongsToMany
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class)
+        return $this->belongsToMany(User::class)
             ->using(RoleUser::class)
             ->withPivot('team_id');
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -55,6 +51,6 @@ class User extends Model
     */
     protected static function newFactory(): Factory
     {
-        return UserFactory::new();
+        return RoleFactory::new();
     }
 }
