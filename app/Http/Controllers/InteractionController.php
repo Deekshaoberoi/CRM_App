@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\InteractionRepository;
-use Illuminate\Support\Facades\Redirect;
 use App\Data\InteractionData;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class InteractionController extends Controller
 {
@@ -33,4 +36,16 @@ class InteractionController extends Controller
 
         return Redirect::route('interactions.index');
     }
+
+    public function search(Request $request)
+    {
+        return InteractionData::collect(QueryBuilder::for(Interaction::class)
+            ->allowedSorts(['id'])
+            ->allowedFilters([
+                'id',
+                AllowedFilter::exact('id'),
+            ])
+            ->get());
+    }
+
 }

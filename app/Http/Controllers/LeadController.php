@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\LeadRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 use App\Data\LeadData;
 
 class LeadController extends Controller
@@ -32,5 +35,15 @@ class LeadController extends Controller
         $this->leadRepository->updateLead($request->validated(), $this->leadRepository->getLeadById($id));
 
         return Redirect::route('leads.index');
+    }
+    public function search(Request $request)
+    {
+        return LeadData::collect(QueryBuilder::for(Lead::class)
+            ->allowedSorts(['id'])
+            ->allowedFilters([
+                'id',
+                AllowedFilter::exact('id'),
+            ])
+            ->get());
     }
 }

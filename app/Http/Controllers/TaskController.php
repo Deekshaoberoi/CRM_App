@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\TaskRepository;
-use Illuminate\Support\Facades\Redirect;
 use App\Data\TaskData;
+use App\Repositories\TaskRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
@@ -32,5 +35,16 @@ class TaskController extends Controller
         $this->taskRepository->updateTask($request->validated(), $this->taskRepository->getTaskById($id));
 
         return Redirect::route('tasks.index');
+    }
+
+    public function search(Request $request)
+    {
+        return TaskData::collect(QueryBuilder::for(Task::class)
+            ->allowedSorts(['id'])
+            ->allowedFilters([
+                'id',
+                AllowedFilter::exact('id'),
+            ])
+            ->get());
     }
 }

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Data\ActivityLogData;
 use App\Repositories\ActivityLogRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ActivityLogController extends Controller
 {
@@ -33,5 +36,16 @@ class ActivityLogController extends Controller
             $this->activityLogRepository->getActivityLogById($id));
 
         return Redirect::route('Activity-Logs.index');
+    }
+
+    public function search(Request $request)
+    {
+        return ActivityLogData::collect(QueryBuilder::for(ActivityLog::class)
+            ->allowedSorts(['id'])
+            ->allowedFilters([
+                'id',
+                AllowedFilter::exact('id'),
+            ])
+            ->get());
     }
 }

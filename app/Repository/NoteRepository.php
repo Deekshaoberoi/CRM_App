@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Data\NotesData;
 use App\Models\Notes;
 
-class NotesRepository
+class NoteRepository
 {
     public function getNotesById(int $id, $relations = []): Notes
     {

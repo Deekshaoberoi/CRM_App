@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Data\CustomerData;
 use App\Repositories\CustomerRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class CustomerController extends Controller
 {
@@ -33,5 +36,16 @@ class CustomerController extends Controller
             $this->customerRepository->getCustomerById($id));
 
         return Redirect::route('customers.index');
+    }
+
+    public function search(Request $request)
+    {
+        return CustomerData::collect(QueryBuilder::for(Customer::class)
+            ->allowedSorts(['id'])
+            ->allowedFilters([
+                'id',
+                AllowedFilter::exact('id'),
+            ])
+            ->get());
     }
 }

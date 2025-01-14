@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Data\UserData;
 use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
 {
@@ -32,5 +35,16 @@ class UserController extends Controller
         $this->usersRepository->updateUser($request->validated(), $this->usersRepository->getUserById($id));
 
         return Redirect::route('users.index');
+    }
+
+    public function search(Request $request)
+    {
+        return UserData::collect(QueryBuilder::for(User::class)
+            ->allowedSorts(['id'])
+            ->allowedFilters([
+                'id',
+                AllowedFilter::exact('id'),
+            ])
+            ->get());
     }
 }
