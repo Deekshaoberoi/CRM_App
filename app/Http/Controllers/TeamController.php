@@ -14,7 +14,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class TeamController extends Controller
 {
-    public function __construct(private TeamRepository $teamRepository) {}
+    public function __construct(private TeamRepository $teamsRepository) {}
 
     public function index()
     {
@@ -28,15 +28,15 @@ class TeamController extends Controller
 
     public function store(TeamData $request)
     {
-        $this->teamRepository->storeTeam($request->validated());
+        $this->teamsRepository->storeTeam($request->validated());
 
         return Redirect::route('teams.index');
     }
 
     public function update(TeamData $request, int $id)
     {
-        $this->teamRepository->updateTeam($request->validated(),
-            $this->teamRepository->getTeamById($id));
+        $this->teamsRepository->updateTeam($request->validated(),
+            $this->teamsRepository->getTeamById($id));
 
         return Redirect::route('teams.index');
     }
@@ -54,7 +54,7 @@ class TeamController extends Controller
 
     public function addMember(Request $request, int $id)
     {
-        $team = $this->teamRepository->getTeamById($id);
+        $team = $this->teamsRepository->getTeamById($id);
         $user = User::find($request->user_id);
         $role = Role::find($request->role_id);
 
@@ -65,7 +65,7 @@ class TeamController extends Controller
 
     public function removeMember(Request $request, int $id)
     {
-        $team = $this->teamRepository->getTeamById($id);
+        $team = $this->teamsRepository->getTeamById($id);
         $user = User::find($request->user_id);
 
         $team->users()->detach($user);

@@ -31,11 +31,6 @@ class Role extends Model
         ];
     }
 
-    public function getData()
-    {
-        return $this->toArray();
-    }
-
     /*
     |--------------------------------------------------------------------------
     | Relatons
