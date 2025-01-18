@@ -15,6 +15,28 @@ class UserData extends Data
 
        public null|optional|string $phone;
 
+       public static function rules()
+       {
+              return [
+                  'name' => [
+                      'nullable',
+                      'string',
+                  ],
+                  'email' => [
+                      'nullable',
+                      'string',
+                  ],
+                  'password' => [
+                      'nullable',
+                      'string',
+                  ],
+                  'phone' => [
+                      'nullable',
+                      'string',
+                  ],
+              ];
+       }
+
 }
 
 

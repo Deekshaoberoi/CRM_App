@@ -17,4 +17,33 @@ class EmailCampaignData extends Data
     public null|optional|string $status;
 
     public null|optional|int $created_by;
+
+    public static function rules()
+    {
+        return [
+            'name' => [
+                'nullable',
+                'string',
+            ],
+            'subject' => [
+                'nullable',
+                'string',
+            ],
+            'content' => [
+                'nullable',
+                'string',
+            ],
+            'send_date' => [
+                'nullable',
+                'date'],
+            'status' => [
+                'nullable',
+                'string',
+            ],
+            'created_by' => [
+                'nullable',
+                'integer',
+            ],
+        ];
+    }
 }

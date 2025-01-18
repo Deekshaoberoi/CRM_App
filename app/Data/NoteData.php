@@ -13,4 +13,26 @@ class NoteData extends Data
     public null|optional|string $content;
 
     public null|optional|int $created_by;
+
+    public static function rules()
+    {
+        return [
+            'related_to' => [
+                'nullable',
+                'string',
+            ],
+            'related_id' => [
+                'nullable',
+                'integer',
+            ],
+            'content' => [
+                'nullable',
+                'string',
+            ],
+            'created_by' => [
+                'nullable',
+                'integer',
+            ],
+        ];
+    }
 }

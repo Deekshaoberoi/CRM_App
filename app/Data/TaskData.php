@@ -19,4 +19,38 @@ class TaskData extends Data
     public null|optional|string $related_to;
 
     public null|optional|int $related_id;
+
+    public static function rules()
+    {
+        return [
+            'name' => [
+                'nullable',
+                'string',
+            ],
+            'description' => [
+                'nullable',
+                'string',
+            ],
+            'due_date' => [
+                'nullable',
+                'date',
+            ],
+            'status' => [
+                'nullable',
+                'string',
+            ],
+            'assigned_to' => [
+                'nullable',
+                'integer',
+            ],
+            'related_to' => [
+                'nullable',
+                'string',
+            ],
+            'related_id' => [
+                'nullable',
+                'integer',
+            ],
+        ];
+    }
 }

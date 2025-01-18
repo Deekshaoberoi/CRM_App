@@ -14,4 +14,6 @@ class LeadData extends Data
          public null|optional|int $assigned_to;
 
          public null|optional|int $customer_id;
+
+         
 }

@@ -23,4 +23,41 @@ class CustomerData extends Data
 
        public null|optional|string $postal_code;
 
+         public static function rules()
+         {
+                return [
+                    'name' => [
+                        'nullable',
+                        'string',
+                    ],
+                    'email' => [
+                        'nullable',
+                        'string',
+                    ],
+                    'phone' => [
+                        'nullable',
+                        'string',
+                    ],
+                    'address' => [
+                        'nullable',
+                        'string',
+                    ],
+                    'city' => [
+                        'nullable',
+                        'string',
+                    ],
+                    'state' => [
+                        'nullable',
+                        'string',
+                    ],
+                    'country' => [
+                        'nullable',
+                        'string',
+                    ],
+                    'postal_code' => [
+                        'nullable',
+                        'string',
+                    ],
+                ];
+         }
 }
