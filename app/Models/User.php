@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Spatie\LaravelData\withData;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
@@ -46,8 +47,6 @@ class User extends Model
             ->using(RoleUser::class)
             ->withPivot('team_id');
     }
-
-
     /*
     |--------------------------------------------------------------------------
     | Factory

@@ -22,7 +22,7 @@ class UserRepositoryTest extends TestCase
         $this->user = app(UserRepository::class);
     }
 
-    public function test_get_User_by_id(): void
+    public function test_get_user_by_id(): void
     {
         $user = User::factory()->create();
 
@@ -32,31 +32,34 @@ class UserRepositoryTest extends TestCase
     public function test_store_user(): void
     {
         $user = User::factory()->make();
+        $userData = new UserData($user->except('id')->toArray());
 
-        $this->user->storeUser($user->getData());
+        $this->user->storeUser($userData);
 
         $this->assertDatabaseHas((new User)->getTable(), [
             'name' => $user->name,
             'email' => $user->email,
             'position' => $user->position,
+            'phone' => $user->phone,
         ]);
     }
 
     public function test_update_user(): void
     {
         $user = User::factory()->create();
-
         $user->position = 'developer';
+        $userData = new UserData($user->toArray()); // Create UserData object
 
-        $this->user->updateUser($user->getData(), $user);
+        $this->user->updateUser($userData, $user);
 
         $this->assertDatabaseHas((new User)->getTable(), [
             'id' => $user->id,
             'position' => 'developer',
+            'phone' => $user->phone,
         ]);
     }
 
-    public function test_delete_User(): void
+    public function test_delete_user(): void
     {
         $user = User::factory()->create();
 
