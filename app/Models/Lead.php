@@ -30,7 +30,7 @@ class Lead extends Model
         'updated_at',
     ];
 
-    protected function casts(): array
+    protected function casts()
     {
         return [
             'customer_id' => 'integer',
